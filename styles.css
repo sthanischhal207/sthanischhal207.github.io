@@ -614,6 +614,12 @@ a {
     transition: color 0.3s ease;
 }
 
+.skill-logo {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
 .skill-card span {
     font-size: 1.125rem;
     font-weight: 500;
