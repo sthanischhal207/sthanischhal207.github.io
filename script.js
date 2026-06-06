@@ -156,26 +156,47 @@ if (prevBtn && nextBtn) {
 
 // Touch swipe logic for mobile
 let touchStartX = 0;
+let touchStartY = 0;
 let touchEndX = 0;
+let touchEndY = 0;
+const carouselViewport = document.getElementById('carouselViewport');
 
-if (projectsTrack) {
-    projectsTrack.addEventListener('touchstart', e => {
+if (carouselViewport) {
+    carouselViewport.addEventListener('touchstart', e => {
         touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
     }, {passive: true});
     
-    projectsTrack.addEventListener('touchend', e => {
+    carouselViewport.addEventListener('touchmove', e => {
+        let touchCurrentX = e.changedTouches[0].screenX;
+        let touchCurrentY = e.changedTouches[0].screenY;
+        
+        let diffX = Math.abs(touchStartX - touchCurrentX);
+        let diffY = Math.abs(touchStartY - touchCurrentY);
+        
+        if (diffX > diffY) {
+            e.preventDefault();
+        }
+    }, {passive: false});
+    
+    carouselViewport.addEventListener('touchend', e => {
         touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
         handleSwipe();
     }, {passive: true});
 }
 
 function handleSwipe() {
     const swipeThreshold = 50;
-    if (touchEndX < touchStartX - swipeThreshold) {
-        if (nextBtn && !nextBtn.disabled) nextBtn.click();
-    }
-    if (touchEndX > touchStartX + swipeThreshold) {
-        if (prevBtn && !prevBtn.disabled) prevBtn.click();
+    let diffX = touchEndX - touchStartX;
+    let diffY = Math.abs(touchEndY - touchStartY);
+    
+    if (Math.abs(diffX) > diffY && Math.abs(diffX) > swipeThreshold) {
+        if (diffX < 0) {
+            if (nextBtn && !nextBtn.disabled) nextBtn.click();
+        } else {
+            if (prevBtn && !prevBtn.disabled) prevBtn.click();
+        }
     }
 }
 
