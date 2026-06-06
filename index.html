@@ -219,7 +219,10 @@
                 <button class="filter-btn" data-filter="c-programming">C Programming</button>
             </div>
 
-            <div class="projects-grid">
+            <div class="projects-carousel-wrapper">
+                <button class="carousel-btn prev-btn" id="prevBtn" aria-label="Previous"><i data-lucide="chevron-left"></i></button>
+                <div class="carousel-viewport" id="carouselViewport">
+                    <div class="carousel-track" id="projectsTrack">
                 <!-- Project 1 -->
                 <div class="project-card reveal" data-category="automation" style="--delay: 0.2s">
                     <div class="project-content">
@@ -279,7 +282,11 @@
                         <a href="#" class="btn btn-secondary btn-sm">View Project</a>
                     </div>
                 </div>
+                </div>
+                </div>
+                <button class="carousel-btn next-btn" id="nextBtn" aria-label="Next"><i data-lucide="chevron-right"></i></button>
             </div>
+            <div class="carousel-dots" id="carouselDots"></div>
         </section>
 
         <!-- EXPERIENCE SECTION -->

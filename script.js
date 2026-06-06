@@ -93,25 +93,110 @@ revealElements.forEach(el => {
     revealOnScroll.observe(el);
 });
 
-// Projects Filter Logic
+// Projects Carousel and Filter Logic
 const filterBtns = document.querySelectorAll('.filter-btn');
 const projectCards = document.querySelectorAll('.project-card');
+const projectsTrack = document.getElementById('projectsTrack');
+const carouselDots = document.getElementById('carouselDots');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
 
+let currentSlide = 0;
+let visibleCards = Array.from(projectCards);
+
+function getCardsPerView() {
+    return window.innerWidth > 768 ? 2 : 1;
+}
+
+function updateCarousel() {
+    const cardsPerView = getCardsPerView();
+    const totalSlides = Math.ceil(visibleCards.length / cardsPerView);
+    
+    if (currentSlide >= totalSlides) currentSlide = Math.max(0, totalSlides - 1);
+    
+    if (projectsTrack) {
+        projectsTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+    
+    if (carouselDots) {
+        carouselDots.innerHTML = '';
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('button');
+            dot.classList.add('carousel-dot');
+            dot.setAttribute('aria-label', `Slide ${i + 1}`);
+            if (i === currentSlide) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                currentSlide = i;
+                updateCarousel();
+            });
+            carouselDots.appendChild(dot);
+        }
+    }
+    
+    if (prevBtn) prevBtn.disabled = currentSlide === 0;
+    if (nextBtn) nextBtn.disabled = currentSlide >= totalSlides - 1 || totalSlides === 0;
+}
+
+if (prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', () => {
+        if (currentSlide > 0) {
+            currentSlide--;
+            updateCarousel();
+        }
+    });
+    
+    nextBtn.addEventListener('click', () => {
+        const totalSlides = Math.ceil(visibleCards.length / getCardsPerView());
+        if (currentSlide < totalSlides - 1) {
+            currentSlide++;
+            updateCarousel();
+        }
+    });
+}
+
+// Touch swipe logic for mobile
+let touchStartX = 0;
+let touchEndX = 0;
+
+if (projectsTrack) {
+    projectsTrack.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, {passive: true});
+    
+    projectsTrack.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, {passive: true});
+}
+
+function handleSwipe() {
+    const swipeThreshold = 50;
+    if (touchEndX < touchStartX - swipeThreshold) {
+        if (nextBtn && !nextBtn.disabled) nextBtn.click();
+    }
+    if (touchEndX > touchStartX + swipeThreshold) {
+        if (prevBtn && !prevBtn.disabled) prevBtn.click();
+    }
+}
+
+window.addEventListener('resize', () => {
+    updateCarousel();
+});
+
+// Filter Logic Integration
 if (filterBtns.length > 0 && projectCards.length > 0) {
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Remove active class from all buttons
             filterBtns.forEach(b => b.classList.remove('active'));
-            // Add active class to clicked button
             btn.classList.add('active');
             
             const filterValue = btn.getAttribute('data-filter');
+            visibleCards = [];
             
             projectCards.forEach(card => {
-                // If filter is all or matches the card's category
                 if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
                     card.style.display = 'flex';
-                    // Small delay to allow display block to apply before transition
+                    visibleCards.push(card);
                     setTimeout(() => {
                         card.style.opacity = '1';
                         card.style.transform = 'scale(1)';
@@ -119,14 +204,20 @@ if (filterBtns.length > 0 && projectCards.length > 0) {
                 } else {
                     card.style.opacity = '0';
                     card.style.transform = 'scale(0.95)';
-                    // Wait for transition before hiding completely
                     setTimeout(() => {
                         card.style.display = 'none';
                     }, 300);
                 }
             });
+            
+            setTimeout(() => {
+                currentSlide = 0;
+                updateCarousel();
+            }, 310);
         });
     });
+    
+    updateCarousel();
 }
 
 // Contact Form Validation
