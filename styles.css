@@ -1269,7 +1269,21 @@ a {
         flex: 0 0 calc(100% - 1rem);
     }
     .carousel-btn {
-        display: none; /* Hide arrows on mobile, swipe only */
+        width: 32px;
+        height: 32px;
+    }
+    .carousel-btn i {
+        width: 16px;
+        height: 16px;
+    }
+    .prev-btn {
+        left: 5px;
+    }
+    .next-btn {
+        right: 5px;
+    }
+    .projects-carousel-wrapper {
+        padding: 0 45px;
     }
     .carousel-viewport {
         margin: 0;
