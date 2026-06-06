@@ -202,3 +202,25 @@ if (mobileMenu && navLinks) {
     });
 }
 
+// Scroll Spy
+const sections = document.querySelectorAll('section[id]');
+const navLinksItems = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', () => {
+    let current = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.scrollY >= (sectionTop - window.innerHeight / 3)) {
+            current = section.getAttribute('id');
+        }
+    });
+
+    navLinksItems.forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href') === `#${current}`) {
+            a.classList.add('active');
+        }
+    });
+});
