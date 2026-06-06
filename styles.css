@@ -231,6 +231,32 @@ a {
     transform: translateY(-2px);
 }
 
+.btn-youtube {
+    background-color: transparent;
+    color: #ef4444;
+    border: 2px solid #ef4444;
+    gap: 0.35rem;
+}
+
+.btn-youtube:hover {
+    background-color: rgba(239, 68, 68, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(239, 68, 68, 0.15);
+}
+
+.btn-instagram {
+    background-color: transparent;
+    color: #a855f7;
+    border: 2px solid #a855f7;
+    gap: 0.35rem;
+}
+
+.btn-instagram:hover {
+    background-color: rgba(168, 85, 247, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(168, 85, 247, 0.15);
+}
+
 /* Social Links */
 .social-links {
     display: flex;
