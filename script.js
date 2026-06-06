@@ -177,3 +177,28 @@ if (contactForm) {
     });
 }
 
+// Mobile Menu Toggle
+const mobileMenu = document.getElementById('mobile-menu');
+const navLinks = document.querySelector('.nav-links');
+
+if (mobileMenu && navLinks) {
+    mobileMenu.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!mobileMenu.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+        }
+    });
+
+    // Close menu on link click
+    const links = navLinks.querySelectorAll('a');
+    links.forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+        });
+    });
+}
+
