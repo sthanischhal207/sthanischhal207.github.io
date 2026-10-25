@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,18 +7,31 @@
     <meta name="description" content="Personal portfolio of Nischhal Shrestha - Computer Engineering Student, n8n Automation, and Graphics Designer.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <script>
+        // Apply saved theme before paint (no flash)
+        try { document.documentElement.dataset.theme = localStorage.getItem('theme') || 'dark'; } catch (e) {}
+    </script>
 </head>
 <body>
-    <nav class="navbar" id="navbar">
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Animated background -->
+    <div class="bg-fx" aria-hidden="true">
+        <div class="aurora a1"></div>
+        <div class="aurora a2"></div>
+        <div class="aurora a3"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <!-- NAVBAR -->
+    <header class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#home" class="logo">NS</a>
-            <div class="menu-toggle" id="mobile-menu">
-                <i data-lucide="menu"></i>
-            </div>
-            <div class="nav-links">
+            <a href="#home" class="logo"><span>N</span>S<i class="logo-dot"></i></a>
+            <nav class="nav-links" id="navLinks">
                 <a href="#home" class="active">Home</a>
                 <a href="#about">About</a>
                 <a href="#skills">Skills</a>
@@ -26,279 +39,200 @@
                 <a href="#experience">Experience</a>
                 <a href="#education">Education</a>
                 <a href="#contact">Contact</a>
+            </nav>
+            <div class="nav-actions">
+                <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+                <button class="icon-btn menu-toggle" id="mobile-menu" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
             </div>
         </div>
-    </nav>
+    </header>
 
     <main>
-        <!-- HERO SECTION -->
+        <!-- HERO -->
         <section class="hero" id="home">
             <div class="hero-content">
-                <p class="greeting slide-up-fade" style="--delay: 0.1s">Hello, I'm</p>
-                <h1 class="name slide-up-fade" style="--delay: 0.2s">Nischhal Shrestha</h1>
-                <h2 class="title-container slide-up-fade" style="--delay: 0.3s">
+                <span class="badge slide-up" style="--delay:.1s"><i class="pulse-dot"></i> Open to opportunities</span>
+                <p class="greeting slide-up" style="--delay:.2s">Hello, I'm</p>
+                <h1 class="name slide-up" style="--delay:.3s"><span class="gradient-text">Nischhal</span> Shrestha</h1>
+                <h2 class="title-container slide-up" style="--delay:.4s">
                     <span id="typewriter-text" class="typewriter-text"></span><span class="cursor">|</span>
                 </h2>
-                
-                <blockquote class="quote slide-up-fade" style="--delay: 0.4s">
+
+                <blockquote class="quote slide-up" style="--delay:.5s">
                     "Hard work beats talent when talent fails to work hard."
                     <footer>— Kevin Durant</footer>
                 </blockquote>
 
-                <div class="cta-group slide-up-fade" style="--delay: 0.5s">
-                    <a href="#projects" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                <div class="cta-group slide-up" style="--delay:.6s">
+                    <a href="#projects" class="btn btn-primary magnetic"><span>View My Work</span><i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="#contact" class="btn btn-ghost magnetic"><span>Contact Me</span></a>
                 </div>
 
-                <div class="social-links slide-up-fade" style="--delay: 0.6s">
-                    <a href="https://www.linkedin.com/in/nischhal-shrestha-346537315/" target="_blank" aria-label="LinkedIn"><img src="images/app_icons/linkedin.png" alt="LinkedIn" class="app-icon"></a>
-                    <a href="https://www.instagram.com/stha_nischhal207/" target="_blank" aria-label="Instagram"><img src="images/app_icons/instagram.png" alt="Instagram" class="app-icon"></a>
-                    <a href="https://github.com/sthanischhal207" target="_blank" aria-label="GitHub"><img src="images/app_icons/github.png" alt="GitHub" class="app-icon"></a>
-                    <a href="mailto:sthanischhal207@gmail.com" aria-label="Email"><img src="images/app_icons/gmail.png" alt="Email" class="app-icon"></a>
-                    <a href="https://www.facebook.com/nischhal.shrestha.2025" target="_blank" aria-label="Facebook"><img src="images/app_icons/facebook.png" alt="Facebook" class="app-icon"></a>
+                <div class="social-links slide-up" style="--delay:.7s">
+                    <a href="https://www.linkedin.com/in/nischhal-shrestha-346537315/" target="_blank" rel="noopener" aria-label="LinkedIn" class="s-linkedin"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://github.com/sthanischhal207" target="_blank" rel="noopener" aria-label="GitHub" class="s-github"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.instagram.com/stha_nischhal207/" target="_blank" rel="noopener" aria-label="Instagram" class="s-instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/nischhal.shrestha.2025" target="_blank" rel="noopener" aria-label="Facebook" class="s-facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="mailto:sthanischhal207@gmail.com" aria-label="Email" class="s-email"><i class="fa-solid fa-envelope"></i></a>
                 </div>
             </div>
 
-            <div class="hero-visual slide-up-fade" style="--delay: 0.4s">
-                <div class="blob blob-1"></div>
-                <div class="blob blob-2"></div>
-                <div class="blob blob-3"></div>
-                <div class="image-wrapper">
+            <div class="hero-visual slide-up" style="--delay:.5s">
+                <div class="photo-frame" id="photoFrame">
+                    <div class="spin-ring"></div>
+                    <div class="spin-ring ring-2"></div>
                     <img src="images/profile.png" alt="Nischhal Shrestha" class="profile-img">
-                    <div class="glow-ring"></div>
+                    <div class="float-chip chip-1"><i class="fa-solid fa-code"></i> Automation</div>
+                    <div class="float-chip chip-2"><i class="fa-solid fa-pen-nib"></i> Design</div>
+                    <div class="float-chip chip-3"><i class="fa-solid fa-cloud"></i> DevOps</div>
                 </div>
             </div>
+
+            <a href="#about" class="scroll-hint" aria-label="Scroll down"><i class="fa-solid fa-chevron-down"></i></a>
         </section>
 
-        <!-- ABOUT SECTION -->
-        <section class="about-page" id="about">
-            <section class="about-section">
-                <div class="about-split reveal">
-                    <div class="about-visual">
-                        <div class="image-wrapper">
-                            <img src="images/profile.png" alt="Nischhal Shrestha" class="profile-img">
-                            <div class="glow-ring"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="about-content">
-                        <h1 class="section-title">About Me</h1>
-                        <p class="bio">
-                            I am a Computer Engineering student at Pulchowk Campus, Kathmandu, Nepal. I love building automation workflows, designing graphics, and exploring new technologies. Currently working as Graphics Executive at IEEE Computer Society Pulchowk.
-                        </p>
-                        
-                        <div class="contact-card">
-                            <h3>Contact Information</h3>
-                            <ul>
-                                <li><i data-lucide="mail"></i> sthanischhal207@gmail.com</li>
-                                <li><i data-lucide="phone"></i> +977 9847690579</li>
-                                <li><i data-lucide="map-pin"></i> Chandragiri-12, Kathmandu</li>
-                            </ul>
-                            
-                            <div class="social-links-alt mt-4">
-                                <a href="https://www.linkedin.com/in/nischhal-shrestha-346537315/" target="_blank" aria-label="LinkedIn"><img src="images/app_icons/linkedin.png" alt="LinkedIn" class="app-icon"></a>
-                                <a href="https://www.instagram.com/stha_nischhal207/" target="_blank" aria-label="Instagram"><img src="images/app_icons/instagram.png" alt="Instagram" class="app-icon"></a>
-                                <a href="https://github.com/sthanischhal207" target="_blank" aria-label="GitHub"><img src="images/app_icons/github.png" alt="GitHub" class="app-icon"></a>
-                                <a href="mailto:sthanischhal207@gmail.com" aria-label="Email"><img src="images/app_icons/gmail.png" alt="Email" class="app-icon"></a>
-                                <a href="https://www.facebook.com/nischhal.shrestha.2025" target="_blank" aria-label="Facebook"><img src="images/app_icons/facebook.png" alt="Facebook" class="app-icon"></a>
-                            </div>
-                        </div>
+        <!-- ABOUT -->
+        <section class="section" id="about">
+            <div class="section-head reveal">
+                <span class="eyebrow">01 — About</span>
+                <h2 class="section-title">A bit about <span class="gradient-text">me</span></h2>
+            </div>
+
+            <div class="about-grid">
+                <div class="glass about-card reveal">
+                    <p class="bio">
+                        I am a Computer Engineering student at Pulchowk Campus, Kathmandu, Nepal. I love building automation workflows, designing graphics, and exploring new technologies. Currently working as Graphics Executive at IEEE Computer Society Pulchowk.
+                    </p>
+                    <div class="stats">
+                        <div class="stat"><b data-count="4">0</b><span>Projects</span></div>
+                        <div class="stat"><b data-count="7">0</b><span>Tools</span></div>
+                        <div class="stat"><b data-count="5">0</b><span>Communities</span></div>
                     </div>
                 </div>
-            </section>
 
-            <section class="hobbies-section reveal">
-                <h2 class="section-title center">Hobbies & Interests</h2>
+                <div class="glass contact-card reveal" style="--delay:.15s">
+                    <h3>Contact Information</h3>
+                    <ul>
+                        <li><span class="ci"><i class="fa-solid fa-envelope"></i></span> sthanischhal207@gmail.com</li>
+                        <li><span class="ci"><i class="fa-solid fa-phone"></i></span> +977 9847690579</li>
+                        <li><span class="ci"><i class="fa-solid fa-location-dot"></i></span> Chandragiri-12, Kathmandu</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="reveal" style="margin-top:4rem">
+                <h3 class="sub-title">Hobbies &amp; Interests</h3>
                 <div class="marquee-container">
                     <div class="marquee-content">
-                        <!-- Original Set -->
-                        <div class="hobby-card">
-                            <i data-lucide="pen-tool" class="hobby-icon"></i>
-                            <span class="hobby-label">Graphics Designing</span>
-                        </div>
-                        <div class="hobby-card">
-                            <i data-lucide="plane" class="hobby-icon"></i>
-                            <span class="hobby-label">Travelling</span>
-                        </div>
-                        <div class="hobby-card">
-                            <i data-lucide="gamepad-2" class="hobby-icon"></i>
-                            <span class="hobby-label">Gaming</span>
-                        </div>
-                        <div class="hobby-card">
-                            <i data-lucide="book-open" class="hobby-icon"></i>
-                            <span class="hobby-label">Reading Self-Help Books</span>
-                        </div>
-                        <div class="hobby-card">
-                            <i data-lucide="tv" class="hobby-icon"></i>
-                            <span class="hobby-label">Watching Anime</span>
-                        </div>
-                        <!-- Duplicated Set for Seamless Loop -->
-                        <div class="hobby-card">
-                            <i data-lucide="pen-tool" class="hobby-icon"></i>
-                            <span class="hobby-label">Graphics Designing</span>
-                        </div>
-                        <div class="hobby-card">
-                            <i data-lucide="plane" class="hobby-icon"></i>
-                            <span class="hobby-label">Travelling</span>
-                        </div>
-                        <div class="hobby-card">
-                            <i data-lucide="gamepad-2" class="hobby-icon"></i>
-                            <span class="hobby-label">Gaming</span>
-                        </div>
-                        <div class="hobby-card">
-                            <i data-lucide="book-open" class="hobby-icon"></i>
-                            <span class="hobby-label">Reading Self-Help Books</span>
-                        </div>
-                        <div class="hobby-card">
-                            <i data-lucide="tv" class="hobby-icon"></i>
-                            <span class="hobby-label">Watching Anime</span>
-                        </div>
+                        <div class="hobby-card"><i class="fa-solid fa-pen-nib"></i><span>Graphics Designing</span></div>
+                        <div class="hobby-card"><i class="fa-solid fa-plane"></i><span>Travelling</span></div>
+                        <div class="hobby-card"><i class="fa-solid fa-gamepad"></i><span>Gaming</span></div>
+                        <div class="hobby-card"><i class="fa-solid fa-book-open"></i><span>Reading Self-Help Books</span></div>
+                        <div class="hobby-card"><i class="fa-solid fa-tv"></i><span>Watching Anime</span></div>
+                        <!-- duplicate for seamless loop -->
+                        <div class="hobby-card"><i class="fa-solid fa-pen-nib"></i><span>Graphics Designing</span></div>
+                        <div class="hobby-card"><i class="fa-solid fa-plane"></i><span>Travelling</span></div>
+                        <div class="hobby-card"><i class="fa-solid fa-gamepad"></i><span>Gaming</span></div>
+                        <div class="hobby-card"><i class="fa-solid fa-book-open"></i><span>Reading Self-Help Books</span></div>
+                        <div class="hobby-card"><i class="fa-solid fa-tv"></i><span>Watching Anime</span></div>
                     </div>
                 </div>
-            </section>
-        </section>
-
-        <!-- SKILLS SECTION -->
-        <section class="skills-page" id="skills">
-            <h1 class="page-title reveal">My Skills</h1>
-
-            <div class="skills-container">
-                <!-- Design Skills Section -->
-                <section class="skills-section">
-                    <h2 class="skills-heading reveal" style="--delay: 0.1s">Design Skills</h2>
-                    <div class="skills-grid">
-                        <div class="skill-card reveal" style="--delay: 0.2s">
-                            <img src="images/skills/photoshop.png" class="skill-logo" alt="Photoshop">
-                            <span>Photoshop</span>
-                        </div>
-                        <div class="skill-card reveal" style="--delay: 0.3s">
-                            <img src="images/skills/figma.png" class="skill-logo" alt="Figma">
-                            <span>Figma</span>
-                        </div>
-                        <div class="skill-card reveal" style="--delay: 0.4s">
-                            <img src="images/skills/canva.png" class="skill-logo" alt="Canva">
-                            <span>Canva</span>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Development Skills Section -->
-                <section class="skills-section">
-                    <h2 class="skills-heading reveal" style="--delay: 0.1s">Development Skills</h2>
-                    <div class="skills-grid">
-                        <div class="skill-card reveal" style="--delay: 0.2s">
-                            <img src="images/skills/n8n.png" class="skill-logo" alt="N8n">
-                            <span>N8n</span>
-                        </div>
-                        <div class="skill-card reveal" style="--delay: 0.3s">
-                            <img src="images/skills/git.png" class="skill-logo" alt="Git & GitHub">
-                            <span>Git & GitHub</span>
-                        </div>
-                        <div class="skill-card reveal" style="--delay: 0.4s">
-                            <img src="images/skills/C.png" class="skill-logo" alt="C Programming">
-                            <span>C Programming</span>
-                        </div>
-                        <div class="skill-card reveal" style="--delay: 0.5s">
-                            <img src="images/skills/python.png" class="skill-logo" alt="Python">
-                            <span>Python</span>
-                        </div>
-                    </div>
-                </section>
             </div>
         </section>
 
-        <!-- PROJECTS SECTION -->
-        <section class="projects-page" id="projects">
-            <h1 class="page-title reveal">My Projects</h1>
+        <!-- SKILLS -->
+        <section class="section" id="skills">
+            <div class="section-head reveal">
+                <span class="eyebrow">02 — Skills</span>
+                <h2 class="section-title">My <span class="gradient-text">toolkit</span></h2>
+            </div>
 
-            <!-- Filter Buttons -->
-            <div class="filter-container reveal" style="--delay: 0.1s">
+            <div class="skills-container">
+                <div class="skills-section">
+                    <h3 class="skills-heading reveal"><i class="fa-solid fa-palette"></i> Design Skills</h3>
+                    <div class="skills-grid">
+                        <div class="skill-card spotlight reveal" style="--delay:.1s"><img src="images/skills/photoshop.png" class="skill-logo" alt="Photoshop"><span>Photoshop</span></div>
+                        <div class="skill-card spotlight reveal" style="--delay:.2s"><img src="images/skills/figma.png" class="skill-logo" alt="Figma"><span>Figma</span></div>
+                        <div class="skill-card spotlight reveal" style="--delay:.3s"><img src="images/skills/canva.png" class="skill-logo" alt="Canva"><span>Canva</span></div>
+                    </div>
+                </div>
+
+                <div class="skills-section">
+                    <h3 class="skills-heading reveal"><i class="fa-solid fa-terminal"></i> Development Skills</h3>
+                    <div class="skills-grid">
+                        <div class="skill-card spotlight reveal" style="--delay:.1s"><img src="images/skills/n8n.png" class="skill-logo" alt="n8n"><span>n8n</span></div>
+                        <div class="skill-card spotlight reveal" style="--delay:.2s"><img src="images/skills/git.png" class="skill-logo" alt="Git & GitHub"><span>Git &amp; GitHub</span></div>
+                        <div class="skill-card spotlight reveal" style="--delay:.3s"><img src="images/skills/C.png" class="skill-logo" alt="C Programming"><span>C Programming</span></div>
+                        <div class="skill-card spotlight reveal" style="--delay:.4s"><img src="images/skills/python.png" class="skill-logo" alt="Python"><span>Python</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section class="section" id="projects">
+            <div class="section-head reveal">
+                <span class="eyebrow">03 — Projects</span>
+                <h2 class="section-title">Things I've <span class="gradient-text">built</span></h2>
+            </div>
+
+            <div class="filter-container reveal">
                 <button class="filter-btn active" data-filter="all">All</button>
                 <button class="filter-btn" data-filter="automation">Automation</button>
                 <button class="filter-btn" data-filter="design">Design</button>
                 <button class="filter-btn" data-filter="c-programming">C Programming</button>
             </div>
 
-            <div class="projects-carousel-wrapper">
-                <button class="carousel-btn prev-btn" id="prevBtn" aria-label="Previous"><i data-lucide="chevron-left"></i></button>
-                <div class="carousel-viewport" id="carouselViewport">
-                    <div class="carousel-track" id="projectsTrack">
-                <!-- Project 1 -->
-                <div class="project-card reveal" data-category="automation" style="--delay: 0.2s">
-                    <div class="project-content">
-                        <h3 class="project-title">ID Card Automation</h3>
-                        <p class="project-desc">First Real Life Project. Takes an empty template and automatically produces a completed ID card ready in seconds.</p>
-                        <div class="project-tags">
-                            <span class="tag">N8n</span>
-                            <span class="tag">Automation</span>
-                        </div>
-                    </div>
-                    <div class="project-footer">
-                        <a href="https://www.linkedin.com/posts/nischhal-shrestha-346537315_n8n-automation-educationtech-activity-7338223124678688769-JCOz?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAE_9sCYBaBmHatdt9T-u0xf7I0xiEY9qSPk" target="_blank" class="btn btn-secondary btn-sm">View Project</a>
-                    </div>
-                </div>
+            <div class="projects-grid" id="projectsGrid">
+                <article class="project-card tilt spotlight reveal" data-category="automation" style="--delay:.1s">
+                    <div class="project-icon"><i class="fa-solid fa-id-card"></i></div>
+                    <h3 class="project-title">ID Card Automation</h3>
+                    <p class="project-desc">First Real Life Project. Takes an empty template and automatically produces a completed ID card ready in seconds.</p>
+                    <div class="project-tags"><span class="tag">n8n</span><span class="tag">Automation</span></div>
+                    <a href="https://www.linkedin.com/posts/nischhal-shrestha-346537315_n8n-automation-educationtech-activity-7338223124678688769-JCOz?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAE_9sCYBaBmHatdt9T-u0xf7I0xiEY9qSPk" target="_blank" rel="noopener" class="project-link">View Project <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </article>
 
-                <!-- Project 2 -->
-                <div class="project-card reveal" data-category="automation" style="--delay: 0.3s">
-                    <div class="project-content">
-                        <h3 class="project-title">Marksheet Automation</h3>
-                        <p class="project-desc">Second Real Life Project. Takes an empty template and automatically produces a completed grade-sheet ready in seconds.</p>
-                        <div class="project-tags">
-                            <span class="tag">N8n</span>
-                            <span class="tag">Automation</span>
-                        </div>
-                    </div>
-                    <div class="project-footer">
-                        <a href="https://www.linkedin.com/posts/nischhal-shrestha-346537315_automation-n8n-lowcode-activity-7367022744204406786-McUc?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAE_9sCYBaBmHatdt9T-u0xf7I0xiEY9qSPk" target="_blank" class="btn btn-secondary btn-sm">View Project</a>
-                    </div>
-                </div>
+                <article class="project-card tilt spotlight reveal" data-category="automation" style="--delay:.2s">
+                    <div class="project-icon"><i class="fa-solid fa-file-lines"></i></div>
+                    <h3 class="project-title">Marksheet Automation</h3>
+                    <p class="project-desc">Second Real Life Project. Takes an empty template and automatically produces a completed grade-sheet ready in seconds.</p>
+                    <div class="project-tags"><span class="tag">n8n</span><span class="tag">Automation</span></div>
+                    <a href="https://www.linkedin.com/posts/nischhal-shrestha-346537315_automation-n8n-lowcode-activity-7367022744204406786-McUc?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAE_9sCYBaBmHatdt9T-u0xf7I0xiEY9qSPk" target="_blank" rel="noopener" class="project-link">View Project <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </article>
 
-                <!-- Project 3 -->
-                <div class="project-card reveal" data-category="automation" style="--delay: 0.4s">
-                    <div class="project-content">
-                        <h3 class="project-title">Fully Automated Social Media</h3>
-                        <p class="project-desc">Fully automated social media posting system for YouTube and Instagram.</p>
-                        <div class="project-tags">
-                            <span class="tag">N8n</span>
-                            <span class="tag">Automation</span>
-                            <span class="tag">Social Media</span>
-                        </div>
+                <article class="project-card tilt spotlight reveal" data-category="automation" style="--delay:.3s">
+                    <div class="project-icon"><i class="fa-solid fa-share-nodes"></i></div>
+                    <h3 class="project-title">Fully Automated Social Media</h3>
+                    <p class="project-desc">Fully automated social media posting system for YouTube and Instagram.</p>
+                    <div class="project-tags"><span class="tag">n8n</span><span class="tag">Automation</span><span class="tag">Social Media</span></div>
+                    <div class="project-links">
+                        <a href="https://www.youtube.com/@OneMotivationADay" target="_blank" rel="noopener" class="pill pill-yt"><i class="fa-brands fa-youtube"></i> YouTube</a>
+                        <a href="https://www.instagram.com/one_motivationaday/" target="_blank" rel="noopener" class="pill pill-ig"><i class="fa-brands fa-instagram"></i> Instagram</a>
                     </div>
-                    <div class="project-footer" style="gap: 0.75rem; flex-wrap: wrap;">
-                        <a href="https://www.youtube.com/@OneMotivationADay" target="_blank" class="btn btn-youtube btn-sm"><i data-lucide="youtube" style="width: 18px; height: 18px;"></i> YouTube</a>
-                        <a href="https://www.instagram.com/one_motivationaday/" target="_blank" class="btn btn-instagram btn-sm"><i data-lucide="instagram" style="width: 18px; height: 18px;"></i> Instagram</a>
-                    </div>
-                </div>
+                </article>
 
-                <!-- Project 4 -->
-                <div class="project-card reveal" data-category="c-programming" style="--delay: 0.5s">
-                    <div class="project-content">
-                        <h3 class="project-title">C Computer Project</h3>
-                        <p class="project-desc">Solo C project covering Library Management System, Bus Management System, Tic-Tac-Toe and more.</p>
-                        <div class="project-tags">
-                            <span class="tag">C Programming</span>
-                        </div>
-                    </div>
-                    <div class="project-footer">
-                        <a href="https://github.com/sthanischhal207/Computer-Project-2024" class="btn btn-secondary btn-sm">View Project</a>
-                    </div>
-                </div>
-                </div>
-                </div>
-                <button class="carousel-btn next-btn" id="nextBtn" aria-label="Next"><i data-lucide="chevron-right"></i></button>
+                <article class="project-card tilt spotlight reveal" data-category="c-programming" style="--delay:.4s">
+                    <div class="project-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                    <h3 class="project-title">C Computer Project</h3>
+                    <p class="project-desc">Solo C project covering Library Management System, Bus Management System, Tic-Tac-Toe and more.</p>
+                    <div class="project-tags"><span class="tag">C Programming</span></div>
+                    <a href="https://github.com/sthanischhal207/Computer-Project-2024" target="_blank" rel="noopener" class="project-link">View Project <i class="fa-brands fa-github"></i></a>
+                </article>
             </div>
-            <div class="carousel-dots" id="carouselDots"></div>
+            <p class="empty-note" id="emptyNote" hidden>No projects in this category yet — coming soon.</p>
         </section>
 
-        <!-- EXPERIENCE SECTION -->
-        <section class="experience-page" id="experience">
-            <h1 class="page-title reveal">My Experience</h1>
+        <!-- EXPERIENCE -->
+        <section class="section" id="experience">
+            <div class="section-head reveal">
+                <span class="eyebrow">04 — Experience</span>
+                <h2 class="section-title">Where I've <span class="gradient-text">worked</span></h2>
+            </div>
 
             <div class="timeline">
-                <!-- Entry 1 -->
-                <div class="timeline-item reveal" style="--delay: 0.1s">
+                <div class="timeline-item reveal">
                     <div class="timeline-dot"></div>
-                    <div class="timeline-content">
+                    <div class="timeline-content glass spotlight">
                         <div class="timeline-header">
                             <img src="images/experience/LD Cloud.png" class="timeline-logo" alt="LD Cloud">
                             <div class="timeline-title-area">
@@ -306,15 +240,14 @@
                                 <div class="timeline-role">Intern</div>
                             </div>
                         </div>
-                        <div class="timeline-meta">Apr 2026 - Present &nbsp;|&nbsp; Kathmandu, Nepal</div>
+                        <div class="timeline-meta"><i class="fa-regular fa-calendar"></i> Apr 2026 - Present &nbsp;·&nbsp; <i class="fa-solid fa-location-dot"></i> Kathmandu, Nepal</div>
                         <p class="timeline-desc">Working as an intern at LD Cloud, a Nepal-based cloud infrastructure and data center company. Involved in DevOps, infrastructure management, and AI-powered workflow automation.</p>
                     </div>
                 </div>
 
-                <!-- Entry 2 -->
-                <div class="timeline-item reveal" style="--delay: 0.2s">
+                <div class="timeline-item reveal">
                     <div class="timeline-dot"></div>
-                    <div class="timeline-content">
+                    <div class="timeline-content glass spotlight">
                         <div class="timeline-header">
                             <img src="images/experience/Code for change.png" class="timeline-logo" alt="Code for Change">
                             <div class="timeline-title-area">
@@ -322,15 +255,14 @@
                                 <div class="timeline-role">Member</div>
                             </div>
                         </div>
-                        <div class="timeline-meta">Mar 2026 - Present &nbsp;|&nbsp; Kathmandu, Nepal</div>
+                        <div class="timeline-meta"><i class="fa-regular fa-calendar"></i> Mar 2026 - Present &nbsp;·&nbsp; <i class="fa-solid fa-location-dot"></i> Kathmandu, Nepal</div>
                         <p class="timeline-desc">Active member contributing to tech-for-good initiatives and community projects.</p>
                     </div>
                 </div>
 
-                <!-- Entry 3 -->
-                <div class="timeline-item reveal" style="--delay: 0.3s">
+                <div class="timeline-item reveal">
                     <div class="timeline-dot"></div>
-                    <div class="timeline-content">
+                    <div class="timeline-content glass spotlight">
                         <div class="timeline-header">
                             <img src="images/experience/Kathmandu valley leo club.png" class="timeline-logo" alt="Kathmandu Valley Leo Club">
                             <div class="timeline-title-area">
@@ -338,15 +270,14 @@
                                 <div class="timeline-role">Member</div>
                             </div>
                         </div>
-                        <div class="timeline-meta">Feb 2026 - Present &nbsp;|&nbsp; Kathmandu, Nepal</div>
+                        <div class="timeline-meta"><i class="fa-regular fa-calendar"></i> Feb 2026 - Present &nbsp;·&nbsp; <i class="fa-solid fa-location-dot"></i> Kathmandu, Nepal</div>
                         <p class="timeline-desc">Volunteering and participating in community service activities.</p>
                     </div>
                 </div>
 
-                <!-- Entry 4 -->
-                <div class="timeline-item reveal" style="--delay: 0.4s">
+                <div class="timeline-item reveal">
                     <div class="timeline-dot"></div>
-                    <div class="timeline-content">
+                    <div class="timeline-content glass spotlight">
                         <div class="timeline-header">
                             <img src="images/experience/IEEE CS Pulchowk.png" class="timeline-logo" alt="IEEE Computer Society, Pulchowk">
                             <div class="timeline-title-area">
@@ -354,33 +285,39 @@
                                 <div class="timeline-role">Graphics Executive</div>
                             </div>
                         </div>
-                        <div class="timeline-meta">Jan 2026 - Present &nbsp;|&nbsp; Lalitpur, Nepal</div>
+                        <div class="timeline-meta"><i class="fa-regular fa-calendar"></i> Jan 2026 - Present &nbsp;·&nbsp; <i class="fa-solid fa-location-dot"></i> Lalitpur, Nepal</div>
                         <p class="timeline-desc">Managing and creating graphics and visual content for IEEE Computer Society Pulchowk Campus.</p>
                     </div>
                 </div>
 
-                <!-- Entry 5 -->
-                <div class="timeline-item reveal" style="--delay: 0.5s">
+                <div class="timeline-item reveal">
                     <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3 class="timeline-org">KMC Bagbazar Computer Club</h3>
-                        <div class="timeline-role">Member</div>
-                        <div class="timeline-meta">May 2024 - Sep 2025 &nbsp;|&nbsp; Kathmandu, Nepal</div>
+                    <div class="timeline-content glass spotlight">
+                        <div class="timeline-header">
+                            <div class="timeline-logo logo-fallback"><i class="fa-solid fa-computer"></i></div>
+                            <div class="timeline-title-area">
+                                <h3 class="timeline-org">KMC Bagbazar Computer Club</h3>
+                                <div class="timeline-role">Member</div>
+                            </div>
+                        </div>
+                        <div class="timeline-meta"><i class="fa-regular fa-calendar"></i> May 2024 - Sep 2025 &nbsp;·&nbsp; <i class="fa-solid fa-location-dot"></i> Kathmandu, Nepal</div>
                         <p class="timeline-desc">Participated in computer science activities, workshops, and club events.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- EDUCATION SECTION -->
-        <section class="experience-page" id="education">
-            <h1 class="page-title reveal">My Education</h1>
+        <!-- EDUCATION -->
+        <section class="section" id="education">
+            <div class="section-head reveal">
+                <span class="eyebrow">05 — Education</span>
+                <h2 class="section-title">My <span class="gradient-text">journey</span></h2>
+            </div>
 
             <div class="timeline">
-                <!-- Entry 1 -->
-                <div class="timeline-item reveal" style="--delay: 0.1s">
+                <div class="timeline-item reveal">
                     <div class="timeline-dot"></div>
-                    <div class="timeline-content">
+                    <div class="timeline-content glass spotlight">
                         <div class="timeline-header">
                             <img src="images/education/pulchowk campus.png" class="timeline-logo" alt="Pulchowk Campus">
                             <div class="timeline-title-area">
@@ -388,15 +325,14 @@
                                 <div class="timeline-role">Bachelor in Computer Engineering</div>
                             </div>
                         </div>
-                        <div class="timeline-meta">Nov 2025 - Present &nbsp;|&nbsp; Lalitpur, Nepal</div>
+                        <div class="timeline-meta"><i class="fa-regular fa-calendar"></i> Nov 2025 - Present &nbsp;·&nbsp; <i class="fa-solid fa-location-dot"></i> Lalitpur, Nepal</div>
                         <p class="timeline-desc">Currently pursuing Bachelor's degree in Computer Engineering at the premier engineering college of Nepal.</p>
                     </div>
                 </div>
 
-                <!-- Entry 2 -->
-                <div class="timeline-item reveal" style="--delay: 0.2s">
+                <div class="timeline-item reveal">
                     <div class="timeline-dot"></div>
-                    <div class="timeline-content">
+                    <div class="timeline-content glass spotlight">
                         <div class="timeline-header">
                             <img src="images/education/kmc.png" class="timeline-logo" alt="KMC, Bagbazar">
                             <div class="timeline-title-area">
@@ -404,15 +340,14 @@
                                 <div class="timeline-role">+2 Science</div>
                             </div>
                         </div>
-                        <div class="timeline-meta">2023 - 2025 &nbsp;|&nbsp; Kathmandu, Nepal</div>
+                        <div class="timeline-meta"><i class="fa-regular fa-calendar"></i> 2023 - 2025 &nbsp;·&nbsp; <i class="fa-solid fa-location-dot"></i> Kathmandu, Nepal</div>
                         <p class="timeline-desc">Completed higher secondary education in Science stream.</p>
                     </div>
                 </div>
 
-                <!-- Entry 3 -->
-                <div class="timeline-item reveal" style="--delay: 0.3s">
+                <div class="timeline-item reveal">
                     <div class="timeline-dot"></div>
-                    <div class="timeline-content">
+                    <div class="timeline-content glass spotlight">
                         <div class="timeline-header">
                             <img src="images/education/gyanodaya.png" class="timeline-logo" alt="Gyanodaya Secondary School">
                             <div class="timeline-title-area">
@@ -420,80 +355,65 @@
                                 <div class="timeline-role">SEE and BLE</div>
                             </div>
                         </div>
-                        <div class="timeline-meta">2020 - 2023 &nbsp;|&nbsp; Kathmandu, Nepal</div>
+                        <div class="timeline-meta"><i class="fa-regular fa-calendar"></i> 2020 - 2023 &nbsp;·&nbsp; <i class="fa-solid fa-location-dot"></i> Kathmandu, Nepal</div>
                         <p class="timeline-desc">Completed Secondary Education Examination and Basic Level Examination.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CONTACT SECTION -->
-        <section class="contact-page" id="contact">
-            <h1 class="page-title reveal">Get In Touch</h1>
+        <!-- CONTACT -->
+        <section class="section" id="contact">
+            <div class="section-head reveal">
+                <span class="eyebrow">06 — Contact</span>
+                <h2 class="section-title">Let's <span class="gradient-text">talk</span></h2>
+            </div>
 
             <div class="contact-container">
-                <!-- Left Side: Contact Form -->
-                <div class="contact-left reveal" style="--delay: 0.1s">
+                <div class="contact-left glass reveal">
                     <form class="contact-form" id="contactForm" novalidate>
                         <div class="form-group">
+                            <input type="text" id="fullName" name="fullName" placeholder=" ">
                             <label for="fullName">Full Name</label>
-                            <input type="text" id="fullName" name="fullName" placeholder="John Doe">
                         </div>
                         <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder=" ">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="johndoe@example.com">
                         </div>
                         <div class="form-group">
+                            <input type="text" id="subject" name="subject" placeholder=" ">
                             <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" placeholder="Project Inquiry">
                         </div>
                         <div class="form-group">
+                            <textarea id="message" name="message" rows="5" placeholder=" "></textarea>
                             <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" placeholder="Hello, I'd like to talk about..."></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary form-submit-btn">Send Message</button>
+                        <button type="submit" class="btn btn-primary form-submit-btn magnetic"><span>Send Message</span><i class="fa-solid fa-paper-plane"></i></button>
                     </form>
                 </div>
 
-                <!-- Right Side: Contact Info -->
-                <div class="contact-right reveal" style="--delay: 0.2s">
-                    <div class="contact-info-card">
+                <div class="contact-right reveal" style="--delay:.15s">
+                    <div class="glass contact-info-card">
                         <div class="info-item">
-                            <div class="info-icon"><i data-lucide="mail"></i></div>
-                            <div class="info-text">
-                                <h4>Email</h4>
-                                <p>sthanischhal207@gmail.com</p>
-                            </div>
+                            <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                            <div class="info-text"><h4>Email</h4><p>sthanischhal207@gmail.com</p></div>
                         </div>
                         <div class="info-item">
-                            <div class="info-icon"><i data-lucide="phone"></i></div>
-                            <div class="info-text">
-                                <h4>Phone</h4>
-                                <p>+977 9847690579</p>
-                            </div>
+                            <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                            <div class="info-text"><h4>Phone</h4><p>+977 9847690579</p></div>
                         </div>
                         <div class="info-item">
-                            <div class="info-icon"><i data-lucide="map-pin"></i></div>
-                            <div class="info-text">
-                                <h4>Location</h4>
-                                <p>Chandragiri-12, Kathmandu, Nepal</p>
-                            </div>
+                            <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                            <div class="info-text"><h4>Location</h4><p>Chandragiri-12, Kathmandu, Nepal</p></div>
                         </div>
                     </div>
 
-                    <div class="social-grid mt-4">
-                        <a href="https://www.linkedin.com/in/nischhal-shrestha-346537315/" target="_blank" class="social-btn" aria-label="LinkedIn">
-                            <img src="images/app_icons/linkedin.png" alt="LinkedIn" class="app-icon">
-                        </a>
-                        <a href="https://www.instagram.com/stha_nischhal207/" target="_blank" class="social-btn" aria-label="Instagram">
-                            <img src="images/app_icons/instagram.png" alt="Instagram" class="app-icon">
-                        </a>
-                        <a href="https://github.com/sthanischhal207" target="_blank" class="social-btn" aria-label="GitHub">
-                            <img src="images/app_icons/github.png" alt="GitHub" class="app-icon">
-                        </a>
-                        <a href="https://www.facebook.com/nischhal.shrestha.2025" target="_blank" class="social-btn" aria-label="Facebook">
-                            <img src="images/app_icons/facebook.png" alt="Facebook" class="app-icon">
-                        </a>
+                    <div class="social-grid">
+                        <a href="https://www.linkedin.com/in/nischhal-shrestha-346537315/" target="_blank" rel="noopener" class="social-btn s-linkedin" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://github.com/sthanischhal207" target="_blank" rel="noopener" class="social-btn s-github" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://www.instagram.com/stha_nischhal207/" target="_blank" rel="noopener" class="social-btn s-instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/nischhal.shrestha.2025" target="_blank" rel="noopener" class="social-btn s-facebook" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="mailto:sthanischhal207@gmail.com" class="social-btn s-email" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
                     </div>
                 </div>
             </div>
@@ -502,6 +422,7 @@
 
     <footer class="site-footer">
         <p>© 2026 Nischhal Shrestha. Vibe coded.</p>
+        <a href="#home" class="to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></a>
     </footer>
 
     <script src="script.js"></script>
