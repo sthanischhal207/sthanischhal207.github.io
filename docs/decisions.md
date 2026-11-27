@@ -17,9 +17,19 @@ Don't change any of these on your own. If a task conflicts with one, stop and as
 | D11 | Strict CSP: **no inline scripts or styles**, ever | Main defence against injected scripts. | 2026-11-27 |
 | D12 | Public contact info is **email + "Kathmandu, Nepal" only** | Privacy: no phone or street address on a public site. | 2026-11-27 |
 | D13 | Positioning: **System Admin · DevOps · Automation** | Matches current work and LinkedIn. | 2026-11-27 |
+| D14 | `/api/contact` checks **rate limit before Turnstile** | The rate limit is a free local check, while Turnstile verify is a network call. Floods stop before any network call. | 2026-11-27 |
+| D15 | Contact recipient inbox is a Worker secret **`CONTACT_TO`** | The repo is public, so the personal email must never be committed. | 2026-11-27 |
+| D16 | **Admin panel** at `/admin`: login via **Cloudflare Access** (owner's email only, one-time code), Worker re-verifies the Access JWT | No passwords to store or leak. Two layers of checks. Fallback if Access needs a card: GitHub sign-in limited to the owner's account. | 2026-11-27 |
+| D17 | Admin **saves by committing to GitHub** (fine-grained token, this repo only, Contents read/write, secret `GITHUB_TOKEN`). Workers Builds redeploys. | The site stays static, git history is the undo button, and there's no content database. | 2026-11-27 |
+| D18 | Admin scope: **all content, show/hide sections and badge, image/logo uploads, contact messages inbox** | Owner wants full control from one place. | 2026-11-27 |
+| D19 | **D1** database stores contact messages, for the admin inbox only | Messages are kept even if email delivery fails. Free plan. The public site doesn't read from D1. | 2026-11-27 |
 
 ## Log
 
 ### 2026-11-27 11:35 (NPT)
 - **Done:** Recorded the decisions agreed so far (stack, hosting, content, security, design).
 - **How:** Taken from CLAUDE.md and the Cloudflare migration plan.
+
+### 2026-11-27 11:50 (NPT)
+- **Done:** Added D14–D19 (contact check order, private inbox secret, admin panel login/saving/scope, D1 inbox).
+- **How:** The owner answered open questions Q1–Q6.

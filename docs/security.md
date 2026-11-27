@@ -4,7 +4,7 @@ Always follow these. The repo is **public**: anything committed (code, config, h
 
 ## Secrets and private data
 - Secrets live only in `.dev.vars` (local, gitignored) and the Cloudflare dashboard (Worker → Settings → Variables and Secrets, type **Secret**). Never in `wrangler.jsonc`, code, docs, tests or commit messages.
-- Current secrets: `GOOGLE_API_KEY`, `TURNSTILE_SECRET`.
+- Current secrets: `GOOGLE_API_KEY`, `TURNSTILE_SECRET`, `CONTACT_TO` (personal inbox), `GITHUB_TOKEN` (admin saves; fine-grained, this repo only, Contents read/write, with an expiry date).
 - Treat the owner's **personal email address** as private. It must not appear in the repo, `wrangler.jsonc` included. (See open question Q2 for how the contact form gets it.)
 - Before every commit: `git diff --cached` contains no keys, tokens or personal email, and no `.dev.vars` or `.env*` is staged.
 - If a secret is ever committed: rotate it immediately (new key in Google/Cloudflare, delete the old one). Removing the commit isn't enough, because history is public.
@@ -37,6 +37,12 @@ Always follow these. The repo is **public**: anything committed (code, config, h
   - Validate the folder id and every file id against `^[A-Za-z0-9_-]{10,128}$`.
   - Clean titles (strip control characters, max 120 chars).
   - Cap at 500 images and cache 10 min.
+- `/admin*` and `/api/admin/*`:
+  - Cloudflare Access allows only the owner's email.
+  - The Worker also verifies the `Cf-Access-Jwt-Assertion` JWT: signature against the team's public keys, `aud` = the Access app's tag, not expired, and email = owner. Any failure → 403.
+  - Admin writes only accept the known data files and `public/images/**`, never arbitrary paths. Validate the JSON shape before committing.
+  - Uploads: images only (PNG/JPEG/WebP/SVG), size cap, sanitized file names. SVGs get the same script/handler checks as above.
+- Contact messages in D1 are personal data: shown only in the admin, never logged in full, deleted on request.
 - Front end renders API data with `textContent` / `createElement`, never `innerHTML`.
 
 ## Dependencies
@@ -56,3 +62,7 @@ Always follow these. The repo is **public**: anything committed (code, config, h
 ### 2026-11-27 11:35 (NPT)
 - **Done:** Wrote the security rules.
 - **How:** From CLAUDE.md's non-negotiable rules, the security work already built on `vercel-backend` (CSP, SRI, validation, honeypot), and the fact that the repo is public.
+
+### 2026-11-27 11:50 (NPT)
+- **Done:** Added rules for the admin panel (Access + JWT, write allowlist, uploads), D1 messages and the new secrets.
+- **How:** From decisions D15–D19.

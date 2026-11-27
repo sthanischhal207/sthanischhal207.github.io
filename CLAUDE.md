@@ -19,6 +19,8 @@ Static Astro site + one Cloudflare Worker (contact form API, gallery API).
 - **Spam protection:** Turnstile + Rate Limiting binding + honeypot + server validation
 - **Gallery:** Google Drive API (key is a Worker secret), cached with the Workers Cache API (10 min)
 - **Domain/DNS:** Cloudflare (`shresthanischhal.com.np`), Worker Custom Domain for `portfolio.`
+- **Admin panel:** `/admin` behind **Cloudflare Access** (only the owner's email, one-time code); Worker re-verifies the Access JWT. Saving commits `src/data/*.json` / images to GitHub → Workers Builds redeploys (~1–2 min).
+- **D1** (free) stores contact messages only, for the admin inbox. The public site stays static.
 - Everything must stay on Cloudflare's **free plan**. No Vercel, no Upstash.
 
 ## Folder structure (locked)
@@ -30,8 +32,10 @@ src/
 ├── layouts/Base.astro  <head>, bg-fx, Navbar, Footer, script tags
 ├── components/         Navbar, Footer, Timeline(+Item), ProjectCard, SkillCard, SectionHead
 ├── data/*.json         site, projects, experience, clubs, education, skills  ← all content lives here
-└── pages/              index, about, projects, gallery, experience, education, contact, 404
-worker/index.js         /api/contact, /api/gallery; everything else → env.ASSETS
+└── pages/              index, about, projects, gallery, experience, education, contact, 404, admin/
+worker/index.js         router: /api/contact, /api/gallery, /api/admin/*; everything else → env.ASSETS
+worker/*.js             one module per route group (contact, gallery, admin, access-auth)
+migrations/             D1 schema (messages table)
 tests/                  node:test unit tests for both API handlers (mocked env/fetch)
 docs/                   README (index), open-items, decisions, security, content, setup
 ```
@@ -44,12 +48,13 @@ docs/                   README (index), open-items, decisions, security, content
 - Components keep the existing markup: same classes, same `reveal` / `spotlight` / `--delay` attributes.
 - Nav active state and section numbers are passed as **props**, never hard-coded per page.
 - **Look and behaviour must not change** unless the task says so: theme, light default, animations, contact form, gallery, 404, security headers.
-- `/api/contact` order: POST + JSON only → origin allowlist → 10 KB cap → Turnstile verify → rate limit by IP (`CF-Connecting-IP`) → honeypot → field limits + control-char stripping → send. Plain-text email body, `reply_to` = sender. Generic error messages only.
+- `/api/contact` order: POST + JSON only → origin allowlist → 10 KB cap → rate limit by IP (`CF-Connecting-IP`) → Turnstile verify → honeypot → field limits + control-char stripping → save to D1 → send. Plain-text email body, `reply_to` = sender. Generic error messages only.
 - `/api/gallery`: validate ids, clean titles, paginate, safe errors, cache 10 min.
 - Responses send only what the page needs. No secrets, no stack traces.
-- **Secrets** (`GOOGLE_API_KEY`, `TURNSTILE_SECRET`) only in `.dev.vars` (gitignored) and the Cloudflare dashboard. Never in `wrangler.jsonc`, code or commits.
+- **Secrets** (`GOOGLE_API_KEY`, `TURNSTILE_SECRET`, `CONTACT_TO`, `GITHUB_TOKEN`) only in `.dev.vars` (gitignored) and the Cloudflare dashboard. Never in `wrangler.jsonc`, code or commits.
 - Security headers (CSP, HSTS, nosniff, Referrer-Policy, Permissions-Policy, frame-ancestors) live in `public/_headers`. Any new third-party origin must be added there on purpose — never loosen CSP with `unsafe-inline`.
 - `/api/contact` sends `Cache-Control: no-store`.
+- `/admin*` and `/api/admin/*`: every request must carry a valid Cloudflare Access JWT (signature, `aud`, expiry, owner email), checked in the Worker even though Access sits in front. No JWT → 403. Admin responses are `no-store`.
 
 ## Content
 - Positioning: **System Admin · DevOps · Automation**. Keep copy consistent with LinkedIn.
