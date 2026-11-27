@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHead from '../components/SectionHead.astro';
+import SkillCard from '../components/SkillCard.astro';
+import site from '../data/site.json';
+import skills from '../data/skills.json';
+
+const num = (key: string) => site.sectionOrder.indexOf(key) + 1;
+const { about, contact } = site;
+---
+<Base title={site.pages.about.title} description={site.pages.about.description} active="about">
+    <section class="section" id="about">
+        <SectionHead number={num('about')} {...site.sections.about} />
+
+        <div class="about-grid">
+            <div class="glass about-card reveal">
+                <p class="bio">{about.bio}</p>
+                <div class="stats">
+                    {about.stats.map(s => <div class="stat"><b data-count={s.value}>0</b><span>{s.label}</span></div>)}
+                </div>
+            </div>
+
+            <div class="glass contact-card reveal" style="--delay:.15s">
+                <h3>{about.contactCardTitle}</h3>
+                <ul>
+                    <li><span class="ci"><i class="fa-solid fa-envelope"></i></span> {contact.email}</li>
+                    {contact.phone && <li><span class="ci"><i class="fa-solid fa-phone"></i></span> {contact.phone}</li>}
+                    <li><span class="ci"><i class="fa-solid fa-location-dot"></i></span> {contact.address || contact.location}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="reveal" style="margin-top:4rem">
+            <h3 class="sub-title">{about.hobbiesTitle}</h3>
+            <div class="marquee-container">
+                <div class="marquee-content">
+                    {about.hobbies.map(h => <div class="hobby-card"><i class={h.icon}></i><span>{h.label}</span></div>)}
+                    {about.hobbies.map(h => <div class="hobby-card" aria-hidden="true"><i class={h.icon}></i><span>{h.label}</span></div>)}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="skills">
+        <SectionHead number={num('skills')} {...site.sections.skills} />
+
+        <div class="skills-container">
+            {skills.map(group => (
+                <div class="skills-section">
+                    <h3 class="skills-heading reveal"><i class={group.icon}></i> {group.group}</h3>
+                    <div class="skills-grid">
+                        {group.items.map((s, i) => <SkillCard name={s.name} logo={s.logo} delay={(i + 1) / 10} />)}
+                    </div>
+                </div>
+            ))}
+        </div>
+    </section>
+</Base>

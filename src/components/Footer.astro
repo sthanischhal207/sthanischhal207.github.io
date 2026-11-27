@@ -1,0 +1,50 @@
+---
+import site from '../data/site.json';
+
+interface Props { showCta?: boolean }
+const { showCta = true } = Astro.props;
+const { footer, hero, contact } = site;
+---
+<footer class="site-footer">
+    <div class="footer-inner">
+        {showCta && (
+            <div class="footer-cta glass spotlight reveal">
+                <div>
+                    <span class="eyebrow">{footer.cta.eyebrow}</span>
+                    <h2 class="footer-cta-title">{footer.cta.title} <span class="gradient-text">{footer.cta.highlight}</span></h2>
+                </div>
+                <a href={footer.cta.href} class="btn btn-primary magnetic"><span>{footer.cta.button}</span><i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        )}
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="/" class="logo"><span>{site.name.first[0]}</span>{site.name.last[0]}<i class="logo-dot"></i></a>
+                <p>{footer.tagline}</p>
+                {hero.badge.show && <span class="badge"><i class="pulse-dot"></i> {hero.badge.text}</span>}
+            </div>
+            <nav class="footer-col" aria-label="Footer">
+                <h4>Pages</h4>
+                <ul>
+                    {site.nav.map(item => <li><a href={item.href}>{item.label}</a></li>)}
+                </ul>
+            </nav>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <ul>
+                    {site.socials.map(s => <li><a href={s.url} target="_blank" rel="noopener"><i class={s.icon}></i> {s.name}</a></li>)}
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href={`mailto:${contact.email}`}><i class="fa-solid fa-envelope"></i> {contact.email}</a></li>
+                    <li><span><i class="fa-solid fa-location-dot"></i> {contact.location}</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© <span id="year">{new Date().getFullYear()}</span> {footer.copyright}</p>
+            <a href="#top" class="to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></a>
+        </div>
+    </div>
+</footer>

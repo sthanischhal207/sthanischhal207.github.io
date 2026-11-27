@@ -1,0 +1,22 @@
+[
+  {
+    "org": "LD Cloud (L.D. Infinity Pvt. Ltd.)",
+    "role": "Junior System Administrator",
+    "start": "Nov 2026",
+    "end": "Present",
+    "location": "Kathmandu, Nepal",
+    "description": "Part-time Junior System Administrator at LD Cloud, a Nepal-based cloud infrastructure and data center company.",
+    "logo": "/images/experience/LD Cloud.png",
+    "logoAlt": "LD Cloud"
+  },
+  {
+    "org": "LD Cloud (L.D. Infinity Pvt. Ltd.)",
+    "role": "Intern",
+    "start": "May 2026",
+    "end": "Oct 2026",
+    "location": "Kathmandu, Nepal",
+    "description": "Intern at LD Cloud, involved in DevOps, infrastructure management, and AI-powered workflow automation.",
+    "logo": "/images/experience/LD Cloud.png",
+    "logoAlt": "LD Cloud"
+  }
+]

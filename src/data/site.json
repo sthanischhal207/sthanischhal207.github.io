@@ -1,0 +1,88 @@
+{
+  "name": { "first": "Nischhal", "last": "Shrestha" },
+  "nav": [
+    { "key": "home", "label": "Home", "href": "/" },
+    { "key": "about", "label": "About", "href": "/about" },
+    { "key": "projects", "label": "Projects", "href": "/projects" },
+    { "key": "gallery", "label": "Gallery", "href": "/gallery" },
+    { "key": "experience", "label": "Experience", "href": "/experience" },
+    { "key": "education", "label": "Education", "href": "/education" },
+    { "key": "contact", "label": "Contact", "href": "/contact" }
+  ],
+  "sections": {
+    "about": { "label": "About", "title": "A bit about", "highlight": "me" },
+    "skills": { "label": "Skills", "title": "My", "highlight": "toolkit" },
+    "projects": { "label": "Projects", "title": "Things I've", "highlight": "built" },
+    "gallery": { "label": "Gallery", "title": "Design", "highlight": "gallery", "subtitle": "Posters, social media creatives and other things I've designed." },
+    "experience": { "label": "Experience", "title": "Where I've", "highlight": "worked" },
+    "clubs": { "label": "Clubs", "title": "Clubs &", "highlight": "organizations" },
+    "education": { "label": "Education", "title": "My", "highlight": "journey" },
+    "contact": { "label": "Contact", "title": "Let's", "highlight": "talk" }
+  },
+  "sectionOrder": ["about", "skills", "projects", "gallery", "experience", "clubs", "education", "contact"],
+  "pages": {
+    "home": { "title": "Nischhal Shrestha | Portfolio", "description": "Personal portfolio of Nischhal Shrestha - Computer Engineering Student, n8n Automation, and Graphics Designer." },
+    "about": { "title": "About | Nischhal Shrestha", "description": "About Nischhal Shrestha, his skills, tools and interests." },
+    "projects": { "title": "Projects | Nischhal Shrestha", "description": "Automation, design and programming projects by Nischhal Shrestha." },
+    "gallery": { "title": "Gallery | Nischhal Shrestha", "description": "Design gallery of Nischhal Shrestha: posters, social media and graphic design work." },
+    "experience": { "title": "Experience | Nischhal Shrestha", "description": "Work experience, clubs and organizations of Nischhal Shrestha." },
+    "education": { "title": "Education | Nischhal Shrestha", "description": "Education of Nischhal Shrestha." },
+    "contact": { "title": "Contact | Nischhal Shrestha", "description": "Get in touch with Nischhal Shrestha." },
+    "notFound": { "title": "Page not found | Nischhal Shrestha", "description": "Page not found." }
+  },
+  "hero": {
+    "badge": { "show": true, "text": "Open to opportunities" },
+    "greeting": "Hello, I'm",
+    "typewriter": ["Computer Engineering Student", "n8n Automation Expert", "Graphics Designer"],
+    "quote": { "text": "Hard work beats talent when talent fails to work hard.", "author": "Kevin Durant" },
+    "primaryCta": { "label": "View My Work", "href": "/projects" },
+    "secondaryCta": { "label": "Contact Me", "href": "/contact" },
+    "photo": { "src": "/images/profile.png", "alt": "Nischhal Shrestha" },
+    "chips": [
+      { "icon": "fa-solid fa-code", "label": "Automation" },
+      { "icon": "fa-solid fa-pen-nib", "label": "Design" },
+      { "icon": "fa-solid fa-cloud", "label": "DevOps" }
+    ]
+  },
+  "about": {
+    "bio": "I am a Computer Engineering student at Pulchowk Campus, Kathmandu, Nepal. I love building automation workflows, designing graphics, and exploring new technologies. Currently working as Graphics Executive at IEEE Computer Society Pulchowk.",
+    "stats": [
+      { "value": 4, "label": "Projects" },
+      { "value": 7, "label": "Tools" },
+      { "value": 5, "label": "Communities" }
+    ],
+    "contactCardTitle": "Contact Information",
+    "hobbiesTitle": "Hobbies & Interests",
+    "hobbies": [
+      { "icon": "fa-solid fa-pen-nib", "label": "Graphics Designing" },
+      { "icon": "fa-solid fa-plane", "label": "Travelling" },
+      { "icon": "fa-solid fa-gamepad", "label": "Gaming" },
+      { "icon": "fa-solid fa-book-open", "label": "Reading Self-Help Books" },
+      { "icon": "fa-solid fa-tv", "label": "Watching Anime" }
+    ]
+  },
+  "contact": {
+    "email": "contact@shresthanischhal.com.np",
+    "phone": "+977 9847690579",
+    "address": "Chandragiri-12, Kathmandu, Nepal",
+    "location": "Kathmandu, Nepal"
+  },
+  "socials": [
+    { "name": "LinkedIn", "url": "https://www.linkedin.com/in/nischhal-shrestha-346537315/", "icon": "fa-brands fa-linkedin-in", "className": "s-linkedin" },
+    { "name": "GitHub", "url": "https://github.com/sthanischhal207", "icon": "fa-brands fa-github", "className": "s-github" },
+    { "name": "Instagram", "url": "https://www.instagram.com/stha_nischhal207/", "icon": "fa-brands fa-instagram", "className": "s-instagram" },
+    { "name": "Facebook", "url": "https://www.facebook.com/nischhal.shrestha.2025", "icon": "fa-brands fa-facebook-f", "className": "s-facebook" }
+  ],
+  "footer": {
+    "tagline": "Computer Engineering student building automations, designs and cloud infrastructure from Kathmandu, Nepal.",
+    "cta": { "eyebrow": "Got an idea?", "title": "Let's build something", "highlight": "together", "button": "Get in touch", "href": "/contact" },
+    "copyright": "Nischhal Shrestha. Vibe coded."
+  },
+  "notFound": {
+    "eyebrow": "404 — Not found",
+    "title": "This page",
+    "highlight": "doesn't exist",
+    "primary": { "label": "Back home", "href": "/" },
+    "secondary": { "label": "See projects", "href": "/projects" }
+  }
+}

@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+
+const { hero, contact } = site;
+---
+<Base title={site.pages.home.title} description={site.pages.home.description} active="home" mainClass="page-main page-home">
+    <section class="hero" id="home">
+        <div class="hero-content">
+            {hero.badge.show && <span class="badge slide-up" style="--delay:.1s"><i class="pulse-dot"></i> {hero.badge.text}</span>}
+            <p class="greeting slide-up" style="--delay:.2s">{hero.greeting}</p>
+            <h1 class="name slide-up" style="--delay:.3s"><span class="gradient-text">{site.name.first}</span> {site.name.last}</h1>
+            <h2 class="title-container slide-up" style="--delay:.4s">
+                <span id="typewriter-text" class="typewriter-text" data-titles={JSON.stringify(hero.typewriter)}></span><span class="cursor">|</span>
+            </h2>
+
+            <blockquote class="quote slide-up" style="--delay:.5s">
+                "{hero.quote.text}"
+                <footer>— {hero.quote.author}</footer>
+            </blockquote>
+
+            <div class="cta-group slide-up" style="--delay:.6s">
+                <a href={hero.primaryCta.href} class="btn btn-primary magnetic"><span>{hero.primaryCta.label}</span><i class="fa-solid fa-arrow-right"></i></a>
+                <a href={hero.secondaryCta.href} class="btn btn-ghost magnetic"><span>{hero.secondaryCta.label}</span></a>
+            </div>
+
+            <div class="social-links slide-up" style="--delay:.7s">
+                {site.socials.map(s => <a href={s.url} target="_blank" rel="noopener" aria-label={s.name} class={s.className}><i class={s.icon}></i></a>)}
+                <a href={`mailto:${contact.email}`} aria-label="Email" class="s-email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+
+        <div class="hero-visual slide-up" style="--delay:.5s">
+            <div class="photo-frame" id="photoFrame">
+                <div class="spin-ring"></div>
+                <div class="spin-ring ring-2"></div>
+                <img src={hero.photo.src} alt={hero.photo.alt} class="profile-img">
+                {hero.chips.map((c, i) => <div class={`float-chip chip-${i + 1}`}><i class={c.icon}></i> {c.label}</div>)}
+            </div>
+        </div>
+
+        <a href="/about" class="scroll-hint" aria-label="Go to About page"><i class="fa-solid fa-chevron-down"></i></a>
+    </section>
+</Base>

@@ -1,0 +1,21 @@
+[
+  {
+    "group": "Design Skills",
+    "icon": "fa-solid fa-palette",
+    "items": [
+      { "name": "Photoshop", "logo": "/images/skills/photoshop.svg" },
+      { "name": "Figma", "logo": "/images/skills/figma.svg" },
+      { "name": "Canva", "logo": "/images/skills/canva.svg" }
+    ]
+  },
+  {
+    "group": "Development Skills",
+    "icon": "fa-solid fa-terminal",
+    "items": [
+      { "name": "n8n", "logo": "/images/skills/n8n.svg" },
+      { "name": "Git & GitHub", "logo": "/images/skills/git.svg" },
+      { "name": "C Programming", "logo": "/images/skills/c.svg" },
+      { "name": "Python", "logo": "/images/skills/python.svg" }
+    ]
+  }
+]

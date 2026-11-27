@@ -1,0 +1,46 @@
+{
+  "filters": [
+    { "key": "all", "label": "All" },
+    { "key": "automation", "label": "Automation" },
+    { "key": "design", "label": "Design" },
+    { "key": "c-programming", "label": "C Programming" }
+  ],
+  "emptyNote": "No projects in this category yet — coming soon.",
+  "items": [
+    {
+      "title": "ID Card Automation",
+      "category": "automation",
+      "icon": "fa-solid fa-id-card",
+      "description": "First Real Life Project. Takes an empty template and automatically produces a completed ID card ready in seconds.",
+      "tags": ["n8n", "Automation"],
+      "link": { "label": "View Project", "url": "https://www.linkedin.com/posts/nischhal-shrestha-346537315_n8n-automation-educationtech-activity-7338223124678688769-JCOz?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAE_9sCYBaBmHatdt9T-u0xf7I0xiEY9qSPk", "icon": "fa-solid fa-arrow-up-right-from-square" }
+    },
+    {
+      "title": "Marksheet Automation",
+      "category": "automation",
+      "icon": "fa-solid fa-file-lines",
+      "description": "Second Real Life Project. Takes an empty template and automatically produces a completed grade-sheet ready in seconds.",
+      "tags": ["n8n", "Automation"],
+      "link": { "label": "View Project", "url": "https://www.linkedin.com/posts/nischhal-shrestha-346537315_automation-n8n-lowcode-activity-7367022744204406786-McUc?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAE_9sCYBaBmHatdt9T-u0xf7I0xiEY9qSPk", "icon": "fa-solid fa-arrow-up-right-from-square" }
+    },
+    {
+      "title": "Fully Automated Social Media",
+      "category": "automation",
+      "icon": "fa-solid fa-share-nodes",
+      "description": "Fully automated social media posting system for YouTube and Instagram.",
+      "tags": ["n8n", "Automation", "Social Media"],
+      "pills": [
+        { "label": "YouTube", "url": "https://www.youtube.com/@OneMotivationADay", "icon": "fa-brands fa-youtube", "className": "pill-yt" },
+        { "label": "Instagram", "url": "https://www.instagram.com/one_motivationaday/", "icon": "fa-brands fa-instagram", "className": "pill-ig" }
+      ]
+    },
+    {
+      "title": "C Computer Project",
+      "category": "c-programming",
+      "icon": "fa-solid fa-laptop-code",
+      "description": "Solo C project covering Library Management System, Bus Management System, Tic-Tac-Toe and more.",
+      "tags": ["C Programming"],
+      "link": { "label": "View Project", "url": "https://github.com/sthanischhal207/Computer-Project-2024", "icon": "fa-brands fa-github" }
+    }
+  ]
+}

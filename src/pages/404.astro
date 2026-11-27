@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHead from '../components/SectionHead.astro';
+import site from '../data/site.json';
+
+const nf = site.notFound;
+---
+<Base title={site.pages.notFound.title} description={site.pages.notFound.description}>
+    <section class="section notfound">
+        <SectionHead label={nf.eyebrow} title={nf.title} highlight={nf.highlight} />
+        <div class="cta-group notfound-actions reveal">
+            <a href={nf.primary.href} class="btn btn-primary magnetic"><span>{nf.primary.label}</span><i class="fa-solid fa-arrow-right"></i></a>
+            <a href={nf.secondary.href} class="btn btn-ghost magnetic"><span>{nf.secondary.label}</span></a>
+        </div>
+    </section>
+</Base>

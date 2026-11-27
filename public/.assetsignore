@@ -1,0 +1,4 @@
+# Files that should never be uploaded as public assets
+.DS_Store
+*.map
+.assetsignore

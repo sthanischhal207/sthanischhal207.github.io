@@ -1,0 +1,26 @@
+---
+interface Link { label: string; url: string; icon: string; className?: string }
+interface Props {
+  title: string;
+  category: string;
+  icon: string;
+  description: string;
+  tags: string[];
+  link?: Link;
+  pills?: Link[];
+  delay: number;
+}
+const { title, category, icon, description, tags, link, pills, delay } = Astro.props;
+---
+<article class="project-card tilt spotlight reveal" data-category={category} style={`--delay:${delay}s`}>
+    <div class="project-icon"><i class={icon}></i></div>
+    <h3 class="project-title">{title}</h3>
+    <p class="project-desc">{description}</p>
+    <div class="project-tags">{tags.map(t => <span class="tag">{t}</span>)}</div>
+    {link && <a href={link.url} target="_blank" rel="noopener" class="project-link">{link.label} <i class={link.icon}></i></a>}
+    {pills && (
+        <div class="project-links">
+            {pills.map(p => <a href={p.url} target="_blank" rel="noopener" class={`pill ${p.className ?? ''}`}><i class={p.icon}></i> {p.label}</a>)}
+        </div>
+    )}
+</article>

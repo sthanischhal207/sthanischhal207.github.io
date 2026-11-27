@@ -1,0 +1,35 @@
+// Cloudflare Worker config. No secrets here: the repo is public.
+// Secrets (dashboard → Worker → Settings → Variables and Secrets, or .dev.vars locally):
+//   TURNSTILE_SECRET, CONTACT_TO, GOOGLE_API_KEY
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "portfolio",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-11-01",
+
+  // The built Astro site. The Worker runs first only for /api/*.
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*"]
+  },
+
+  // Contact form email. Unrestricted binding (decision D15): the recipient comes from
+  // the CONTACT_TO secret. On the free plan it can only reach verified destination addresses.
+  "send_email": [{ "name": "EMAIL" }],
+
+  // 3 contact messages per IP per minute, per Cloudflare location.
+  "ratelimits": [
+    { "name": "CONTACT_LIMITER", "namespace_id": "1001", "simple": { "limit": 3, "period": 60 } }
+  ],
+
+  "vars": {
+    "ALLOWED_ORIGINS": "https://portfolio.shresthanischhal.com.np",
+    "CONTACT_FROM": "noreply@shresthanischhal.com.np",
+    "GALLERY_FOLDER_ID": ""
+  },
+
+  "observability": { "enabled": true }
+}

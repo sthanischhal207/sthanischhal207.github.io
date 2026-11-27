@@ -1,0 +1,16 @@
+---
+interface Props {
+  number?: number;   // position in the site's section order; omitted for pages like 404
+  label: string;
+  title: string;
+  highlight: string;
+  subtitle?: string;
+}
+const { number, label, title, highlight, subtitle } = Astro.props;
+const eyebrow = number ? `${String(number).padStart(2, '0')} — ${label}` : label;
+---
+<div class="section-head reveal">
+    <span class="eyebrow">{eyebrow}</span>
+    <h2 class="section-title">{title} <span class="gradient-text">{highlight}</span></h2>
+    {subtitle && <p class="section-sub">{subtitle}</p>}
+</div>

@@ -1,0 +1,5 @@
+---
+interface Props { name: string; logo: string; delay: number }
+const { name, logo, delay } = Astro.props;
+---
+<div class="skill-card spotlight reveal" style={`--delay:${delay}s`}><img src={logo} class="skill-logo" alt={name}><span>{name}</span></div>

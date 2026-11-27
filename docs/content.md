@@ -12,14 +12,16 @@
 ## Data files (planned shapes)
 | File | Holds |
 |---|---|
-| `site.json` | name, page titles/descriptions, hero (badge text, typewriter titles, quote + author), bio, stats, hobbies, social links, contact email + location |
-| `projects.json` | `[{ title, description, category, icon, tags[], links[{ label, url, kind }] }]`; `category` must match a filter button |
-| `experience.json` | `[{ org, role, start, end, location, description, logo, logoAlt }]` |
+| `site.json` | name, nav, section headings (`sections`) and their numbering order (`sectionOrder`), page titles/descriptions, hero (badge `show`/`text`, typewriter titles, quote, buttons, photo, chips), about (bio, stats, hobbies), contact (email, phone, address, location), socials, footer, 404 text |
+| `projects.json` | `{ filters[{ key, label }], emptyNote, items[{ title, category, icon, description, tags[], link? or pills[]? }] }`; `category` must match a filter `key` |
+| `experience.json` | `[{ org, role, start, end, location?, description?, logo?, logoAlt?, icon? }]`; `icon` is used when there's no logo |
 | `clubs.json` | same shape as experience; `logo` optional (falls back to an icon) |
 | `education.json` | same shape as experience |
 | `skills.json` | `[{ group, icon, items[{ name, logo }] }]`; logos are SVGs in `public/images/skills/` |
 
 Gallery images are **not** in the repo. They come from the public Drive folder (see `setup.md`). Upload there to add a design, and the file name becomes the caption.
+
+Icons use Font Awesome 6.5 class names (e.g. `fa-solid fa-code`). Images live in `public/images/` and are referenced from the site root (`/images/...`).
 
 ## Pending content changes
 The owner's goals have changed. Before the content task, collect from the owner:
@@ -37,3 +39,7 @@ The owner's goals have changed. Before the content task, collect from the owner:
 ### 2026-11-27 11:35 (NPT)
 - **Done:** Wrote content rules, the planned data file shapes and the list of content to collect.
 - **How:** From CLAUDE.md and the current page content on `vercel-backend`.
+
+### 2026-11-27 13:05 (NPT)
+- **Done:** Updated the data file shapes to match what was built.
+- **How:** Shapes taken from `src/data/*.json` on `feat/cloudflare-astro`.

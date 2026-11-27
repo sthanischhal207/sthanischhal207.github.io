@@ -1,0 +1,72 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHead from '../components/SectionHead.astro';
+import site from '../data/site.json';
+
+const num = (key: string) => site.sectionOrder.indexOf(key) + 1;
+const { contact } = site;
+// Public Turnstile site key, set as a build variable in Workers Builds.
+// Falls back to Cloudflare's official always-pass test key for local builds.
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA';
+---
+<Base title={site.pages.contact.title} description={site.pages.contact.description} active="contact" showFooterCta={false}>
+    <script slot="head" is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+    <section class="section" id="contact">
+        <SectionHead number={num('contact')} {...site.sections.contact} />
+
+        <div class="contact-container">
+            <div class="contact-left glass reveal">
+                <form class="contact-form" id="contactForm" action="/api/contact" method="post" novalidate>
+                    <div class="hp-field" aria-hidden="true">
+                        <label for="website">Leave this empty</label>
+                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" autocomplete="name" id="fullName" name="fullName" maxlength="100" required placeholder=" ">
+                        <label for="fullName">Full Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" autocomplete="email" id="email" name="email" maxlength="254" required placeholder=" ">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" name="subject" maxlength="150" required placeholder=" ">
+                        <label for="subject">Subject</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" rows="5" maxlength="5000" required placeholder=" "></textarea>
+                        <label for="message">Message</label>
+                    </div>
+                    <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-appearance="interaction-only" data-theme="auto" data-before-interactive-callback="onTurnstileInteractive" data-after-interactive-callback="onTurnstileDone"></div>
+                    <button type="submit" class="btn btn-primary form-submit-btn magnetic"><span>Send Message</span><i class="fa-solid fa-paper-plane"></i></button>
+                    <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+
+            <div class="contact-right reveal" style="--delay:.15s">
+                <div class="glass contact-info-card">
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <div class="info-text"><h4>Email</h4><p>{contact.email}</p></div>
+                    </div>
+                    {contact.phone && (
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                            <div class="info-text"><h4>Phone</h4><p>{contact.phone}</p></div>
+                        </div>
+                    )}
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="info-text"><h4>Location</h4><p>{contact.address || contact.location}</p></div>
+                    </div>
+                </div>
+
+                <div class="social-grid">
+                    {site.socials.map(s => <a href={s.url} target="_blank" rel="noopener" class={`social-btn ${s.className}`} aria-label={s.name}><i class={s.icon}></i></a>)}
+                    <a href={`mailto:${contact.email}`} class="social-btn s-email" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+</Base>

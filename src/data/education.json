@@ -1,0 +1,32 @@
+[
+  {
+    "org": "Pulchowk Campus, IOE",
+    "role": "Bachelor in Computer Engineering",
+    "start": "Nov 2025",
+    "end": "Present",
+    "location": "Lalitpur, Nepal",
+    "description": "Currently pursuing Bachelor's degree in Computer Engineering at the premier engineering college of Nepal.",
+    "logo": "/images/education/pulchowk campus.png",
+    "logoAlt": "Pulchowk Campus"
+  },
+  {
+    "org": "KMC, Bagbazar",
+    "role": "+2 Science",
+    "start": "2023",
+    "end": "2025",
+    "location": "Kathmandu, Nepal",
+    "description": "Completed higher secondary education in Science stream.",
+    "logo": "/images/education/kmc.png",
+    "logoAlt": "KMC, Bagbazar"
+  },
+  {
+    "org": "Gyanodaya Secondary School",
+    "role": "SEE and BLE",
+    "start": "2020",
+    "end": "2023",
+    "location": "Kathmandu, Nepal",
+    "description": "Completed Secondary Education Examination and Basic Level Examination.",
+    "logo": "/images/education/gyanodaya.png",
+    "logoAlt": "Gyanodaya Secondary School"
+  }
+]

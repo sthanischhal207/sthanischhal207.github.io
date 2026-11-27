@@ -21,7 +21,8 @@ Always follow these. The repo is **public**: anything committed (code, config, h
 - Required headers on every response: `Content-Security-Policy`, `Strict-Transport-Security`, `X-Content-Type-Options: nosniff`, `Referrer-Policy`, `Permissions-Policy`, `frame-ancestors 'none'` (+ `X-Frame-Options: DENY`).
 - Third-party CSS or JS from a CDN must pin an exact version and carry an `integrity` (SRI) hash.
 
-## API rules (`worker/index.js`)
+## API rules (`worker/`)
+- `public/_headers` only applies to static files. API responses set their own headers in `worker/http.js` (`nosniff`, `default-src 'none'` CSP, `noindex`). Keep both in sync.
 - Each route accepts only its method(s). Anything else gets a 405.
 - Validate every input on the server. Never trust the client-side checks in `script.js`.
 - Error responses are generic ("Invalid request.", "Could not send right now."). No stack traces, upstream status codes, keys or internal names. Log details with `console.error` (visible only in the Cloudflare dashboard).
@@ -66,3 +67,7 @@ Always follow these. The repo is **public**: anything committed (code, config, h
 ### 2026-11-27 11:50 (NPT)
 - **Done:** Added rules for the admin panel (Access + JWT, write allowlist, uploads), D1 messages and the new secrets.
 - **How:** From decisions D15–D19.
+
+### 2026-11-27 13:05 (NPT)
+- **Done:** Noted that API responses carry their own security headers.
+- **How:** `worker/http.js` on `feat/cloudflare-astro`.

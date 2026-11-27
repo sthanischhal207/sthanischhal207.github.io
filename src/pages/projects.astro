@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHead from '../components/SectionHead.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import site from '../data/site.json';
+import projects from '../data/projects.json';
+
+const num = (key: string) => site.sectionOrder.indexOf(key) + 1;
+---
+<Base title={site.pages.projects.title} description={site.pages.projects.description} active="projects">
+    <section class="section" id="projects">
+        <SectionHead number={num('projects')} {...site.sections.projects} />
+
+        <div class="filter-container reveal">
+            {projects.filters.map((f, i) => <button class={i === 0 ? 'filter-btn active' : 'filter-btn'} data-filter={f.key}>{f.label}</button>)}
+        </div>
+
+        <div class="projects-grid" id="projectsGrid">
+            {projects.items.map((p, i) => <ProjectCard {...p} delay={(i + 1) / 10} />)}
+        </div>
+        <p class="empty-note" id="emptyNote" hidden>{projects.emptyNote}</p>
+    </section>
+</Base>

@@ -1,0 +1,22 @@
+---
+import site from '../data/site.json';
+
+interface Props { active?: string }
+const { active } = Astro.props;
+---
+<header class="navbar" id="navbar">
+    <div class="nav-container">
+        <a href="/" class="logo"><span>{site.name.first[0]}</span>{site.name.last[0]}<i class="logo-dot"></i></a>
+        <nav class="nav-links" id="navLinks">
+            {site.nav.map(item => (
+                item.key === active
+                    ? <a href={item.href} class="active" aria-current="page">{item.label}</a>
+                    : <a href={item.href}>{item.label}</a>
+            ))}
+        </nav>
+        <div class="nav-actions">
+            <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+            <button class="icon-btn menu-toggle" id="mobile-menu" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </div>
+</header>

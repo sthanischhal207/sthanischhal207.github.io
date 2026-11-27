@@ -1,0 +1,47 @@
+[
+  {
+    "org": "Kathmandu Valley Leo Club",
+    "role": "Technical Lead",
+    "start": "Jun 2026",
+    "end": "Present",
+    "logo": "/images/experience/Kathmandu valley leo club.png",
+    "logoAlt": "Kathmandu Valley Leo Club"
+  },
+  {
+    "org": "Kathmandu Valley Leo Club",
+    "role": "General Member",
+    "start": "Feb 2026",
+    "end": "Jun 2026",
+    "logo": "/images/experience/Kathmandu valley leo club.png",
+    "logoAlt": "Kathmandu Valley Leo Club"
+  },
+  {
+    "org": "Free Students' Union, Pulchowk Campus",
+    "role": "Automation Team Member",
+    "start": "Aug 2026",
+    "end": "Present",
+    "icon": "fa-solid fa-users"
+  },
+  {
+    "org": "IEEE Computer Society Pulchowk Student Branch Chapter",
+    "role": "Graphics Executive",
+    "start": "Jan 2026",
+    "end": "Present",
+    "logo": "/images/experience/IEEE CS Pulchowk.png",
+    "logoAlt": "IEEE Computer Society, Pulchowk"
+  },
+  {
+    "org": "PDSC",
+    "role": "Creative Team Member",
+    "start": "Jul 2026",
+    "end": "Present",
+    "icon": "fa-solid fa-palette"
+  },
+  {
+    "org": "KMC Computer Club",
+    "role": "General Member",
+    "start": "May 2024",
+    "end": "Sep 2025",
+    "icon": "fa-solid fa-computer"
+  }
+]

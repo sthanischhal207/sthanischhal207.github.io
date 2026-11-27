@@ -1,0 +1,33 @@
+---
+interface Props {
+  org: string;
+  role: string;
+  start: string;
+  end: string;
+  location?: string;
+  description?: string;
+  logo?: string;
+  logoAlt?: string;
+  icon?: string;     // shown when there is no logo
+}
+const { org, role, start, end, location, description, logo, logoAlt, icon = 'fa-solid fa-building' } = Astro.props;
+---
+<div class="timeline-item reveal">
+    <div class="timeline-dot"></div>
+    <div class="timeline-content glass spotlight">
+        <div class="timeline-header">
+            {logo
+                ? <img src={logo} class="timeline-logo" alt={logoAlt || org}>
+                : <div class="timeline-logo logo-fallback"><i class={icon}></i></div>}
+            <div class="timeline-title-area">
+                <h3 class="timeline-org">{org}</h3>
+                <div class="timeline-role">{role}</div>
+            </div>
+        </div>
+        <div class="timeline-meta">
+            <i class="fa-regular fa-calendar"></i> {start} - {end}
+            {location && <Fragment>{' '}&nbsp;·&nbsp; <i class="fa-solid fa-location-dot"></i> {location}</Fragment>}
+        </div>
+        {description && <p class="timeline-desc">{description}</p>}
+    </div>
+</div>

@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHead from '../components/SectionHead.astro';
+import site from '../data/site.json';
+
+const num = (key: string) => site.sectionOrder.indexOf(key) + 1;
+---
+<Base title={site.pages.gallery.title} description={site.pages.gallery.description} active="gallery">
+    <section class="section" id="gallery">
+        <SectionHead number={num('gallery')} {...site.sections.gallery} />
+
+        <div class="gallery-grid" id="galleryGrid" aria-busy="true">
+            {Array.from({ length: 6 }, () => <div class="gallery-skeleton"></div>)}
+        </div>
+        <p class="empty-note" id="galleryNote" hidden></p>
+    </section>
+
+    <dialog class="lightbox" id="lightbox" aria-label="Image viewer">
+        <button class="icon-btn lb-close" id="lbClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+        <button class="icon-btn lb-nav lb-prev" id="lbPrev" aria-label="Previous image"><i class="fa-solid fa-chevron-left"></i></button>
+        <figure class="lb-figure">
+            <img id="lbImg" alt="" referrerpolicy="no-referrer">
+            <figcaption id="lbCaption"></figcaption>
+        </figure>
+        <button class="icon-btn lb-nav lb-next" id="lbNext" aria-label="Next image"><i class="fa-solid fa-chevron-right"></i></button>
+    </dialog>
+</Base>
