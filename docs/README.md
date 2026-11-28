@@ -13,8 +13,8 @@ Start with `CLAUDE.md` in the repo root (rules for working on this project), the
 ## Branch status (as of 2026-11-27)
 - `main`: the original one-page site, live on GitHub Pages at `portfolio.shresthanischhal.com.np`.
 - `vercel-backend` (local only, not pushed): multi-page split, footer, gallery, SVG skill logos, light default, contact form backend. Built for Vercel, which was dropped. **Its front-end work and API logic are the source for the Cloudflare migration**, so don't delete the branch until that migration is merged.
-
 - `feat/cloudflare-astro`: the Astro + Cloudflare Worker version. Built and tested locally, waiting for the go-live steps in `setup.md`.
+- `feat/favicon`: NS logo favicon, branched from `feat/cloudflare-astro` (Astro only exists there), merges right after it.
 
 ## Log
 
@@ -24,4 +24,8 @@ Start with `CLAUDE.md` in the repo root (rules for working on this project), the
 
 ### 2026-11-27 13:05 (NPT)
 - **Done:** Added the migration branch to the branch status.
+- **How:** —
+
+### 2026-11-28 10:55 (NPT)
+- **Done:** Added `feat/favicon` to the branch status.
 - **How:** —

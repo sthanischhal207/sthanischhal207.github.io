@@ -23,6 +23,7 @@ Don't change any of these on your own. If a task conflicts with one, stop and as
 | D17 | Admin **saves by committing to GitHub** (fine-grained token, this repo only, Contents read/write, secret `GITHUB_TOKEN`). Workers Builds redeploys. | The site stays static, git history is the undo button, and there's no content database. | 2026-11-27 |
 | D18 | Admin scope: **all content, show/hide sections and badge, image/logo uploads, contact messages inbox** | Owner wants full control from one place. | 2026-11-27 |
 | D19 | **D1** database stores contact messages, for the admin inbox only | Messages are kept even if email delivery fails. Free plan. The public site doesn't read from D1. | 2026-11-27 |
+| D20 | Turnstile **site key** is a Workers Builds **build variable** `PUBLIC_TURNSTILE_SITE_KEY`; local builds use Cloudflare's test key | Pages are built before the Worker runs, so the key can't come from Worker vars. It's public, so a build variable is fine. | 2026-11-28 |
 
 ## Log
 
@@ -33,3 +34,7 @@ Don't change any of these on your own. If a task conflicts with one, stop and as
 ### 2026-11-27 11:50 (NPT)
 - **Done:** Added D14–D19 (contact check order, private inbox secret, admin panel login/saving/scope, D1 inbox).
 - **How:** The owner answered open questions Q1–Q6.
+
+### 2026-11-28 10:55 (NPT)
+- **Done:** Added D20 (Turnstile site key as a build variable).
+- **How:** Owner approved open question Q9.
